@@ -13,8 +13,8 @@ public class VendingMachine {
 	private int amount;
 	
 	public String readDisplayText() {
-		if (this.coinInserted) {
-			return "" + amount / 100.0;
+		if (this.amount > 0) {
+			return "" + this.amount / 100.0;
 		}
 		return "Insert Coin";
 	}

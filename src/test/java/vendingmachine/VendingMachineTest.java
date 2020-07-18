@@ -55,6 +55,14 @@ public class VendingMachineTest {
     void test_penny_insert_do_nothing() {
         final VendingMachine vendingMachine = new VendingMachine();        
         vendingMachine.insert("penny");
-        assertEquals("0.0", vendingMachine.readDisplayText());
+        assertEquals("Insert Coin", vendingMachine.readDisplayText());
+    }
+
+    @Test
+    void test_nickel_and_penny_insert_do_nothing() {
+        final VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insert("nickel");
+        vendingMachine.insert("penny");
+        assertEquals("0.05", vendingMachine.readDisplayText());
     }
 }
