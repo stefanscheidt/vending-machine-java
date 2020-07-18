@@ -1,5 +1,6 @@
 package vendingmachine;
 
+import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ public class VendingMachine {
 	private int amount;
 	private String displayText;
 	private boolean productSelected;
+	private int change;
 
 	public VendingMachine() {
 		displayText = "Insert Coin";
@@ -34,9 +36,9 @@ public class VendingMachine {
 	}
 
 	public void selectCola() {
-		if (this.amount == 100) {
-			this.amount = 0;
-			this.displayText = "THANK YOU!";
+		if (this.amount >= 100) {
+			change = amount - 100;
+			resetAmountAndThankYou();
 			return;
 		}
 		displayText = "PRICE 1.00";
@@ -44,21 +46,32 @@ public class VendingMachine {
 	}
 
 	public void selectChips() {
-		if (this.amount == 50) {
-			this.amount = 0;
-			this.displayText = "THANK YOU!";
+		if (this.amount >= 50) {
+			change = amount - 50;
+			resetAmountAndThankYou();
 			return;
 		}
 		displayText = "PRICE 0.50";
+		productSelected = true;
 	}
 
 	public void selectCandy() {
-		if (this.amount == 65) {
-			this.amount = 0;
-			this.displayText = "THANK YOU!";
+		int price = 65;
+		if (this.amount >= price) {
+			change = amount - price;
+			resetAmountAndThankYou();
 			return;
 		}
-		displayText = "PRICE 0.65";
+		displayText = "PRICE " + new DecimalFormat("#.00").format(price / 100.0);
 		productSelected = true;
+	}
+
+	private void resetAmountAndThankYou() {
+		this.amount = 0;
+		this.displayText = "THANK YOU!";
+	}
+
+	public int getChange() {
+		return change;
 	}
 }

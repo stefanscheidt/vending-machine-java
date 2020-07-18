@@ -103,9 +103,16 @@ public class VendingMachineTest {
         assertEquals("PRICE 1.00", vendingMachine.readDisplayText());
         assertEquals("0.05", vendingMachine.readDisplayText());
     }
-    
-    // TODO test chips insufficient money
-    
+
+    @Test @DisplayName("test_chips_with_insufficient_money")
+    void test_chips_with_insufficient_money() {
+        final VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insert("nickel");
+        vendingMachine.selectChips();
+        assertEquals("PRICE 0.50", vendingMachine.readDisplayText());
+        assertEquals("0.05", vendingMachine.readDisplayText());
+    }
+
     @Test @DisplayName("test product candy with enough money")
     void testProductCandyWithEnoughMoney() {
         final VendingMachine vendingMachine = new VendingMachine();
@@ -140,5 +147,42 @@ public class VendingMachineTest {
         assertEquals("Insert Coin", vendingMachine.readDisplayText());
     }
 
+
+    @Test @DisplayName("test product chips with more money")
+    void testProductChipsWithMoreMoney() {
+        final VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insert("quarter");
+        vendingMachine.insert("quarter");
+        vendingMachine.insert("quarter");
+        vendingMachine.selectChips();
+        assertEquals("THANK YOU!", vendingMachine.readDisplayText());
+        assertEquals("Insert Coin", vendingMachine.readDisplayText());
+        assertEquals(25, vendingMachine.getChange());
+    }
     
+    @Test @DisplayName("test product chips with more money")
+    void testProductColaWithMoreMoney() {
+        final VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insert("quarter");
+        vendingMachine.insert("quarter");
+        vendingMachine.insert("quarter");
+        vendingMachine.insert("quarter");
+        vendingMachine.insert("nickel");    
+        vendingMachine.selectCola();
+        assertEquals("THANK YOU!", vendingMachine.readDisplayText());
+        assertEquals("Insert Coin", vendingMachine.readDisplayText());
+        assertEquals(5, vendingMachine.getChange());
+    }
+    
+    @Test @DisplayName("test product candy with more money")
+    void testProductCandyWithMoreMoney() {
+        final VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insert("quarter");
+        vendingMachine.insert("quarter");
+        vendingMachine.insert("quarter");
+        vendingMachine.selectCandy();
+        assertEquals("THANK YOU!", vendingMachine.readDisplayText());
+        assertEquals("Insert Coin", vendingMachine.readDisplayText());
+        assertEquals(10, vendingMachine.getChange());
+    }
 }
