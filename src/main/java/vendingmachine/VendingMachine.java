@@ -21,13 +21,12 @@ public class VendingMachine {
 		if (this.amount > 0 && !productSelected) {
 			return "" + this.amount / 100.0;
 		}
+		String resultingDisplayText = displayText;
 		if (displayText.equals("THANK YOU!")) {
-			String returnedDisplayText = displayText;
 			displayText = "Insert Coin";
-			return returnedDisplayText;
 		}
 		productSelected = false;
-		return displayText;
+		return resultingDisplayText;
 	}
 
 	public void insert(final String coin) {
@@ -35,10 +34,21 @@ public class VendingMachine {
 	}
 
 	public void selectCola() {
+		if (this.amount == 100) {
+			this.amount = 0;
+			this.displayText = "THANK YOU!";
+			return;
+		}
 		displayText = "PRICE 1.00";
+		productSelected = true;
 	}
 
 	public void selectChips() {
+		if (this.amount == 50) {
+			this.amount = 0;
+			this.displayText = "THANK YOU!";
+			return;
+		}
 		displayText = "PRICE 0.50";
 	}
 
