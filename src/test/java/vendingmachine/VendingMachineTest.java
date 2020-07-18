@@ -65,4 +65,6 @@ public class VendingMachineTest {
         vendingMachine.insert("penny");
         assertEquals("0.05", vendingMachine.readDisplayText());
     }
+    
+    // TODO test product 1 without money displays the price of product 1
 }

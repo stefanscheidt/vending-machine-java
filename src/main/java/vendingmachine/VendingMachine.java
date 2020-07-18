@@ -9,7 +9,6 @@ public class VendingMachine {
 		put("dime", Integer.valueOf(10));
 		put("quarter", Integer.valueOf(25));
 	}};
-	private boolean coinInserted;
 	private int amount;
 	
 	public String readDisplayText() {
@@ -21,6 +20,5 @@ public class VendingMachine {
 
 	public void insert(final String coin) {
 		this.amount += this.coins.getOrDefault(coin, 0);
-		this.coinInserted = true;
 	}
 }
