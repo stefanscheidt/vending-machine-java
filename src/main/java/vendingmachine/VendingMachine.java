@@ -1,6 +1,14 @@
 package vendingmachine;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class VendingMachine {
+	private Map<String, Integer> coins = new HashMap<>(){{
+		put("nickel", Integer.valueOf(5)); 
+		put("dime", Integer.valueOf(10));
+		put("quarter", Integer.valueOf(25));
+	}};
 	private boolean coinInserted;
 	private int amount;
 	
@@ -12,14 +20,7 @@ public class VendingMachine {
 	}
 
 	public void insert(final String coin) {
-		switch (coin) {
-			case "dime":
-				amount += 10;
-				break;
-			case "Nickel":
-				amount += 5;
-				break;
-		}
+		this.amount += this.coins.getOrDefault(coin, 0);
 		this.coinInserted = true;
 	}
 }
