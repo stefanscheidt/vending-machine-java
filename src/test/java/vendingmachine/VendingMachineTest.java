@@ -2,7 +2,6 @@ package vendingmachine;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -67,4 +66,44 @@ public class VendingMachineTest {
     }
     
     // TODO test product 1 without money displays the price of product 1
+    @Test @DisplayName("test_product_one_without_money")
+    void testProductOneWithoutMoney() {
+        final VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.selectCola();
+        assertEquals("PRICE 1.00", vendingMachine.readDisplayText());
+    }
+    
+    @Test @DisplayName("test_product_two_without_money")
+    void testProductTwoWithoutMoney() {
+        final VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.selectChips();
+        assertEquals("PRICE 0.50", vendingMachine.readDisplayText());
+    }
+
+    @Test @DisplayName("test_product_three_without_money")
+    void testProductThreeWithoutMoney() {
+        final VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.selectCandy();
+        assertEquals("PRICE 0.65", vendingMachine.readDisplayText());
+    }
+    @Test @DisplayName("test_product_with_money")
+    void testProductWithMoney() {
+        final VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insert("nickel");
+        vendingMachine.selectCandy();
+        assertEquals("PRICE 0.65", vendingMachine.readDisplayText());
+        assertEquals("0.05", vendingMachine.readDisplayText());
+    }
+    
+    @Test @DisplayName("test product with enough money")
+    void testProductWithEnoughMoney() {
+        final VendingMachine vendingMachine = new VendingMachine();
+        vendingMachine.insert("nickel");
+        vendingMachine.insert("quarter");
+        vendingMachine.insert("quarter");
+        vendingMachine.insert("dime");
+        vendingMachine.selectCandy();
+        assertEquals("THANK YOU!", vendingMachine.readDisplayText());
+        assertEquals("Insert Coin", vendingMachine.readDisplayText());
+    }
 }
